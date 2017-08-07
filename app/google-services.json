@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "978457059072",
+    "firebase_url": "https://hotgirlopedia.firebaseio.com",
+    "project_id": "hotgirlopedia",
+    "storage_bucket": "hotgirlopedia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978457059072:android:3dfc0484e0a00a67",
+        "android_client_info": {
+          "package_name": "com.app.sonpham.hotgirlopedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978457059072-04h7f7hri40gnhcma3e14s7t5gu5tbdh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJsvRcDYWof7a0sB-aY-gIW6cDU1sZxuI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
