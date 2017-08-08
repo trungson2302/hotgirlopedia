@@ -27,9 +27,9 @@ public class MyASyncTask extends AsyncTask<Void,Integer,String> {
     private String mURL;
     private String mStringData="";
     private String mStatus="FAILED TO DOWNLOAD FILES";
-    private OkHttpClient client = new OkHttpClient();
-    private AsyncResponse asyncResponse=null;
-    private FirebaseDatabase firebaseDatabase;
+    private OkHttpClient mOkHttpClient = new OkHttpClient();
+    private AsyncResponse mAsyncResponse =null;
+
     public interface AsyncResponse {
         void processFinish(ArrayList<HotGirl> output);
     }
@@ -37,17 +37,21 @@ public class MyASyncTask extends AsyncTask<Void,Integer,String> {
     public MyASyncTask(Context context, String url, AsyncResponse asyncResponse) {
         mContext=context;
         mURL=url;
-        this.asyncResponse=asyncResponse;
+        this.mAsyncResponse =asyncResponse;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         mData=new ArrayList<HotGirl>();
-        ((MainActivity)mContext).prgProgress.setMax(100);
-        firebaseDatabase=FirebaseDatabase.getInstance();
+        ((LoadActivity)mContext).progressBar.setMax(100);
     }
 
+    /**
+     * parse JSON and put into mData
+     * @param params
+     * @return
+     */
     @Override
     protected String doInBackground(Void... params) {
         try{
@@ -83,26 +87,33 @@ public class MyASyncTask extends AsyncTask<Void,Integer,String> {
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        ((MainActivity)mContext).prgProgress.setProgress(values[0]);
-        ((MainActivity)mContext).tvProgress.setText(values[0]+"/"+100);
+        ((LoadActivity)mContext).progressBar.setProgress(values[0]);
+        ((LoadActivity)mContext).textView.setText(values[0]+"/"+100);
     }
 
     @Override
     protected void onPostExecute(String aVoid) {
         super.onPostExecute(aVoid);
         if(aVoid.equalsIgnoreCase("FILES DOWNLOADED")){
-            ((MainActivity)mContext).prgProgress.setProgress(100);
-            ((MainActivity)mContext).tvProgress.setText(aVoid);
-            ((MainActivity)mContext).btnGetIn.setEnabled(true);
-            asyncResponse.processFinish(mData);
+            ((LoadActivity)mContext).progressBar.setProgress(100);
+            ((LoadActivity)mContext).textView.setText(aVoid);
+            ((LoadActivity)mContext).button.setEnabled(true);
+            mAsyncResponse.processFinish(mData);
         }
     }
+
+    /**
+     * run OkHttpClient
+     * @param url
+     * @return
+     * @throws IOException
+     */
     String run(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
 
-        Response response = client.newCall(request).execute();
+        Response response = mOkHttpClient.newCall(request).execute();
         return response.body().string();
     }
 

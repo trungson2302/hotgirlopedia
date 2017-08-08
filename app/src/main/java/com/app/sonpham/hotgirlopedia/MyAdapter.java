@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>  {
     private Context mContext;
     private ArrayList<HotGirl> mData;
-    private HotGirl hotGirl;
+    private HotGirl mHotGirl;
     public MyAdapter(Context context,ArrayList<HotGirl> data) {
         mContext=context;
         mData = data;
@@ -32,7 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>  {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View inflatedView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.hotgirl_item_layout, parent, false);
+                .inflate(R.layout.item_hotgirl, parent, false);
         return new ViewHolder(inflatedView,mData);
     }
 
@@ -46,7 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>  {
                 .error(R.drawable.photo_error)
                 .into(holder.mImage);
         holder.mName.setText(mData.get(position).getmName());
-        hotGirl=mData.get(position);
+        mHotGirl =mData.get(position);
     }
 
 
@@ -71,7 +71,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>  {
                                     R.anim.item_anim);
                     v.startAnimation(animation1);
                     HotGirl data=mData.get(getAdapterPosition());
-                    Intent intent=new Intent(v.getContext(),Main3Activity2.class);
+                    Intent intent=new Intent(v.getContext(),PersonalActivity.class);
                     intent.putExtra("name",data.getmName());
                     intent.putExtra("fb",data.getmFB());
                     intent.putExtra("insta",data.getmInsta());

@@ -14,21 +14,26 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText editText_ID,editText_PW;
-    Button button_Login;
+    private EditText mEditTextId, mEditTextPw;
+    private Button mButtonLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        editText_ID=(EditText)findViewById(R.id.editText);
-        editText_PW=(EditText)findViewById(R.id.editText2);
-        button_Login=(Button)findViewById(R.id.button3);
-        button_Login.setOnClickListener(new View.OnClickListener() {
+
+        mEditTextId =(EditText)findViewById(R.id.editText);
+        mEditTextPw =(EditText)findViewById(R.id.editText2);
+        mButtonLogin =(Button)findViewById(R.id.button3);
+
+        /**
+         * login
+         */
+        mButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editText_ID.getText().toString().equalsIgnoreCase("admin") &&
-                        editText_PW.getText().toString().equalsIgnoreCase("admin")){
-                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                if(mEditTextId.getText().toString().equalsIgnoreCase("admin") &&
+                        mEditTextPw.getText().toString().equalsIgnoreCase("admin")){
+                    Intent intent=new Intent(LoginActivity.this,LoadActivity.class);
                     startActivity(intent);
                     Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                     finish();
@@ -38,27 +43,32 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-    private void checkNetWorkAvailable(){
-        if(isNetworkAvailable()==false){
-            AlertDialog dialog=new AlertDialog.Builder(LoginActivity.this).create();
-            dialog.setTitle("NetWork Not Available !");
-            dialog.setMessage("Try Again ?");
-            dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    checkNetWorkAvailable();
-                }
-            });
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-        }else {
-            // do stuff
-        }
-    }
+
+//    /**
+//     * check if network is available
+//     * @return true if available
+//     */
+//    private boolean isNetworkAvailable() {
+//        ConnectivityManager connectivityManager
+//                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+//        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+//    }
+//    private void checkNetWorkAvailable(){
+//        if(isNetworkAvailable()==false){
+//            AlertDialog dialog=new AlertDialog.Builder(LoginActivity.this).create();
+//            dialog.setTitle("NetWork Not Available !");
+//            dialog.setMessage("Try Again ?");
+//            dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    checkNetWorkAvailable();
+//                }
+//            });
+//            dialog.setCanceledOnTouchOutside(false);
+//            dialog.show();
+//        }else {
+//            // do stuff
+//        }
+//    }
 }

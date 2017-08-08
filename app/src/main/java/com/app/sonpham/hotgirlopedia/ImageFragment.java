@@ -14,13 +14,11 @@ import com.squareup.picasso.Picasso;
  * A simple {@link Fragment} subclass.
  */
 public class ImageFragment extends Fragment {
+    private ImageView imageView;
 
-    String url;
     public ImageFragment() {
         // Required empty public constructor
     }
-
-    ImageView imageView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

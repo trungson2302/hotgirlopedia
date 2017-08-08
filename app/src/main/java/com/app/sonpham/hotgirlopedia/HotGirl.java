@@ -8,15 +8,6 @@ import android.os.Parcelable;
  */
 
 public class HotGirl implements Parcelable{
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public HotGirl createFromParcel(Parcel in) {
-            return new HotGirl(in);
-        }
-
-        public HotGirl[] newArray(int size) {
-            return new HotGirl[size];
-        }
-    };
 
     private int mID;
     private String mName;
@@ -61,6 +52,34 @@ public class HotGirl implements Parcelable{
         this.mPhoto4 = mPhoto4;
         this.mPhoto5 = mPhoto5;
     }
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mID);
+        dest.writeString(mName);
+        dest.writeString(mFB);
+        dest.writeString(mInsta);
+        dest.writeString(mPhoto1);
+        dest.writeString(mPhoto2);
+        dest.writeString(mPhoto3);
+        dest.writeString(mPhoto4);
+        dest.writeString(mPhoto5);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public HotGirl createFromParcel(Parcel in) {
+            return new HotGirl(in);
+        }
+
+        public HotGirl[] newArray(int size) {
+            return new HotGirl[size];
+        }
+    };
 
     public int getmID() {
         return mID;
@@ -136,21 +155,5 @@ public class HotGirl implements Parcelable{
     public String toString(){
         return mName;
     }
-    @Override
-    public int describeContents() {
-        return hashCode();
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mID);
-        dest.writeString(mName);
-        dest.writeString(mFB);
-        dest.writeString(mInsta);
-        dest.writeString(mPhoto1);
-        dest.writeString(mPhoto2);
-        dest.writeString(mPhoto3);
-        dest.writeString(mPhoto4);
-        dest.writeString(mPhoto5);
-    }
 }
